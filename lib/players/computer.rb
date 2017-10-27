@@ -2,9 +2,9 @@ module Players
   class Computer < Player
     attr_accessor :board
 
-    def other_token
-      token == "X" ? "O" : "X"
-    end
+    # def other_token
+    #   token == "X" ? "O" : "X"
+    # end
 
     # def move(board)
     #   pos = rand(1..9).to_s
@@ -21,6 +21,5 @@ module Players
       end
       pos = potencial_win.find { |idx| board.cells[idx] == "" } + 1
     end
-
   end
 end
