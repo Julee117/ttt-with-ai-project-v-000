@@ -25,9 +25,9 @@ module Players
       elsif potential_win
         pos = potential_win.find { |idx| board.cells[idx] == " " }
         input = (pos + 1).to_s
-      else 
+      else
         input = rand(1..9).to_s
-      end 
+      end
     end
 
   end
