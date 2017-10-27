@@ -14,10 +14,10 @@ module Players
     def move(board)
       if board.turn_count <= 4
         pos = rand(1..9).to_s
-      else 
+      else
         potential_win = WIN_COMBINATIONS.find do |array|
           (board.cells[0] == token && board.cells[1] == token) || (board.cells[1] == token && board.cells[2] == token) ||
-            (board.cells[0] == token && board.cells[2] == token
+            (board.cells[0] == token && board.cells[2] == token)
         end
       end 
       pos = potencial_win.find { |idx| board.cells[idx] == "" } + 1
