@@ -63,8 +63,6 @@ class Game
     puts "Which player should go first and have a token of 'X'? (1 or 2)"
     puts "For example, write as (1, 1)"
     input = gets.strip.split(",").map(&:to_i)
-    
-    num = gets.strip
 
     case input
     when [0, 1]
