@@ -19,8 +19,8 @@ module Players
           (board.cells[0] == token && board.cells[1] == token) || (board.cells[1] == token && board.cells[2] == token) ||
             (board.cells[0] == token && board.cells[2] == token)
         end
-      end 
-      pos = potencial_win.find { |idx| board.cells[idx] == "" } + 1
+      end
+      pos = potential_win.find { |idx| board.cells[idx] == "" } + 1
     end
   end
 end
