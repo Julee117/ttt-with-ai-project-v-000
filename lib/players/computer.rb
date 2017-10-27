@@ -22,5 +22,6 @@ module Players
         pos = potential_win.find { |idx| board.cells[idx] == "" } + 1
       end
     end
+    
   end
 end
