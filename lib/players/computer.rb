@@ -21,12 +21,12 @@ module Players
       end
       if other_win
         pos = other_win.find { |idx| board.cells[idx] == " " }
-        pos = pos + 1
+        input = pos + 1
       elsif potential_win
         pos = potential_win.find { |idx| board.cells[idx] == " " }
-        pos = pos + 1
+        input = pos + 1
       else
-        pos = rand(1..9)
+        input = rand(1..9)
       end
     end
 
