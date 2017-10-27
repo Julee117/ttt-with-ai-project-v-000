@@ -52,8 +52,10 @@ class Game
       turn
     end
     if won?
+      board.display 
       puts "Congratulations #{winner}!"
     else
+      board.display
       puts "Cat's Game!"
     end
   end
