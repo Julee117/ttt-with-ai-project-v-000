@@ -2,9 +2,9 @@ module Players
   class Computer < Player
     attr_accessor :board
 
-    # def other_token
-    #   token == "X" ? "O" : "X"
-    # end
+    def other_token
+      token == "X" ? "O" : "X"
+    end
 
     # def move(board)
     #   pos = rand(1..9).to_s
@@ -16,12 +16,16 @@ module Players
         (board.cells[0] == token && board.cells[1] == token) || (board.cells[1] == token && board.cells[2] == token) ||
           (board.cells[0] == token && board.cells[2] == token)
       end
+      other_win = WIN_COMBINATIONS.find do |array|
+        (board.cells[0] == token && board.cells[1] == token) || (board.cells[1] == token && board.cells[2] == token) ||
+          (board.cells[0] == token && board.cells[2] == token)
+      end
       if potential_win
         pos = (potential_win.find { |idx| board.cells[idx] == "" } + 1).to_s
-      else 
+      else
         pos = rand(1..9).to_s
-      end 
+      end
     end
-    
+
   end
 end
