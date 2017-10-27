@@ -1,5 +1,4 @@
 class Game
-
   WIN_COMBINATIONS = [[0,1,2], [3,4,5], [6,7,8], [0,3,6], [1,4,7],[2,5,8], [0,4,8], [6,4,2]]
 
   attr_accessor :board, :player_1, :player_2
@@ -19,11 +18,9 @@ class Game
   end
 
   def won?
-    WIN_COMBINATIONS.any? do |arr|
-      if (board.cells[arr[0]] == "X" && board.cells[arr[1]] == "X" && board.cells[arr[2]] == "X") ||
+    WIN_COMBINATIONS.find do |arr|
+      (board.cells[arr[0]] == "X" && board.cells[arr[1]] == "X" && board.cells[arr[2]] == "X") ||
           (board.cells[arr[0]] == "O" && board.cells[arr[1]] == "O" && board.cells[arr[2]] == "O")
-          return arr
-      end
     end
   end
 
@@ -36,9 +33,10 @@ class Game
   end
 
   def turn
-    input = current_player.move
-    if board.valid_move?(input)
+    input = current_player.move(board)
+    if board.valid_move?(input.to_s)
       board.update(input, current_player)
+      board.display
     else
       turn
     end
@@ -46,40 +44,46 @@ class Game
   end
 
   def play
+    board.display
     until over?
       turn
     end
     if won?
+      board.display
       puts "Congratulations #{winner}!"
     else
+      board.display
       puts "Cat's Game!"
     end
   end
 
-  def start
+  def self.start
     puts "Welcome to Tic Tac Toe!"
     puts "What player game would you like to play? (0-2)"
-    player_num = gets.strip
     puts "Which player should go first and have a token of 'X'? (1 or 2)"
-    num = gets.strip
+    puts "Write answer as ex. (1, 1)"
+    input = gets.strip.split(",").map(&:to_i)
 
     case input
-    when "O" && num == "1"
-      Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-    when "O" && num == "2"
-      Game.new(player_1=Players::Computer.new("O"), player_2=Players::Computer.new("X"), board=Board.new)
-    when "1" && num == "2"
-      Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
-    when "1" && num == "2"
-      Game.new(player_1=Players::Compuyer.new("O"), player_2=Players::Human.new("X"), board=Board.new)
-    when "2" && num == "1"
-      Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
-    when "2" && num == "2"
-      Game.new(player_1=Players::Human.new("O"), player_2=Players::Human.new("X"), board=Board.new)
+    when [0, 1]
+      game = Game.new(player_1=Players::Computer.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+      game.play
+    when [0, 2]
+      game = Game.new(player_1=Players::Computer.new("O"), player_2=Players::Computer.new("X"), board=Board.new)
+      game.play
+    when [1, 1]
+      game = Game.new(player_1=Players::Human.new("X"), player_2=Players::Computer.new("O"), board=Board.new)
+      game.play
+    when [1, 2]
+      game = Game.new(player_1=Players::Computer.new("O"), player_2=Players::Human.new("X"), board=Board.new)
+      game.play
+    when [2, 1]
+      game = Game.new(player_1=Players::Human.new("X"), player_2=Players::Human.new("O"), board=Board.new)
+      game.play
+    when [2, 2]
+      game = Game.new(player_1=Players::Human.new("O"), player_2=Players::Human.new("X"), board=Board.new)
+      game.play
     end
-
-    board.display
-    game.play
 
     puts "Would you like to play again?(Y/N)"
     input = gets.strip.upcase
@@ -87,6 +91,6 @@ class Game
       start
     else
       exit
-    end 
+    end
   end
 end
