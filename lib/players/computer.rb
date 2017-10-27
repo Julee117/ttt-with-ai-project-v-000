@@ -10,21 +10,21 @@ module Players
 
     def move(board)
       potential_win = WIN_COMBINATIONS.find do |array|
-        (board.cells[0] == token && board.cells[1] == token) || 
+        (board.cells[0] == token && board.cells[1] == token) ||
           (board.cells[1] == token && board.cells[2] == token) ||
             (board.cells[0] == token && board.cells[2] == token)
       end
       other_win = WIN_COMBINATIONS.find do |array|
-        (board.cells[0] == other_token && board.cells[1] == other_token) || 
+        (board.cells[0] == other_token && board.cells[1] == other_token) ||
           (board.cells[1] == other_token && board.cells[2] == other_token) ||
             (board.cells[0] == other_token && board.cells[2] == other_token)
       end
-      if other_win 
-        pos = (other_win.find { |idx| board.cells[idx] == "" } + 1).to_s
+      if other_win
+        pos = (other_win.find { |idx| board.cells[idx] == "" } + 1
       elsif potential_win
-        pos = (potential_win.find { |idx| board.cells[idx] == "" } + 1).to_s
+        pos = (potential_win.find { |idx| board.cells[idx] == "" } + 1
       else
-        pos = rand(1..9).to_s
+        pos = rand(1..9)
       end
     end
 
