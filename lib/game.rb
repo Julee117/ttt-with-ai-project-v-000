@@ -56,7 +56,7 @@ class Game
     end
   end
 
-  def start
+  def self.start
     puts "Welcome to Tic Tac Toe!"
     puts "What player game would you like to play? (0-2)"
     player_num = gets.strip
@@ -87,6 +87,6 @@ class Game
       start
     else
       exit
-    end 
+    end
   end
 end
