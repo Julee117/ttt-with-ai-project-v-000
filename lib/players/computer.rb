@@ -26,8 +26,7 @@ module Players
         pos = potential_win.find { |idx| board.cells[idx] == " " }
         input = pos + 1
       end 
-        input = rand(1..9)
-      end
+      input = rand(1..9)
     end
 
   end
